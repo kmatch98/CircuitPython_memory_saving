@@ -1,5 +1,4 @@
-# CircuitPython solutions to running out of Memory
-## especially text and graphics
+# CircuitPython solutions to running out of Memory <br/>especially text and graphics
 
 CircuitPython boards have two types of memory, non-volatile memory where programs are stored. This includes your `code.py` file and all library files. You may also have bitmaps and font files stored in non-volatile memory, sometimes called EEPROM. If you run out of non-volatile memory, you usually observe an error when trying to copy a file onto the `CIRCUITPY` drive, giving an error like “out of space, cannot save file”. 
 
@@ -45,14 +44,14 @@ This imports only the Label function from the adafruit_display_text library. The
 ### Biggest memory user #1: Bitmaps
 
 If you are using Adafruit_Imageload for displaying bitmaps, that may be a large user
-of your precious RAM. Regarding bitmaps, one memory-saving alternative to Adafruit_Imageload is to display directly from the stored file using the OnDiskBitmap functions: https://learn.adafruit.com/circuitpython-display-support-using-displayio/display-a-bitmap#ondiskbitmap-3026044-6
+of your precious RAM. Regarding bitmaps, one memory-saving alternative to Adafruit_Imageload is to [display directly from the stored file using the OnDiskBitmap functions](https://learn.adafruit.com/circuitpython-display-support-using-displayio/display-a-bitmap#ondiskbitmap-3026044-6)
 
 Using OnDiskBitmap does not store the bitmap in RAM, it just draws it directly from the stored file location (could be the CIRCUITPY drive or an SD memory card). The downside is that the display will not update as fast when using OnDiskBitmap since it has to be loaded from the none-volatile memory which is often slower, and OnDiskBitmap does not take advantage of displayio’s “dirty rectangle” tracking that reduces redraw times. 
 
 If you need the fast display redrawing that you get with Adafruit_Imageload of bitmaps, you can consider simplifying the color depth of your bitmaps. The bitmaps that CircuitPython can use are so-called “indexed” bitmaps. They contain a palette of colors used in the bitmap, and then each pixel on the bitmap has an entry in the file that tells it which palette color should be used. If you can reduce the number of colors then it may reduce memory usage significantly. But keep in mind due to the binary nature of how bitmap colors are stored, there are breakpoints in the number of colors that will have an impact on memory usage. For example, if you have 32 colors, going to 31 colors won’t save anything, but reducing to 16 colors will practically halve the amount of RAM that the bitmap uses. You’ll need an external image editor to change the amount of colors, you can probably find tools online that can do this. The main jumps occur between 2, 4, 8, 16, 32, 64, 128, and 256 (they’re binary factors of 2).
 Try reducing your color depth by a factor of two and see how much it helps and whether that is a good solution for your program and what you want to display. 
 
-Get rid of bitmaps.  If your bitmaps are relatively simple shapes and lines, don’t use bitmaps, but instead use the `vectorio` functions. You can draw lines, circles and polygons and it doesn’t use much RAM at all. If at all possible, use `vectorio` shapes to conserve RAM and ditch the bitmaps. https://circuitpython.readthedocs.io/en/latest/shared-bindings/vectorio/index.html (vectorio could use a good example). 
+Get rid of bitmaps.  If your bitmaps are relatively simple shapes and lines, don’t use bitmaps, but instead use the `vectorio` functions. You can draw lines, circles and polygons and it doesn’t use much RAM at all. If at all possible, use `vectorio` shapes to conserve RAM and ditch the bitmaps. [Learn more abput vectorio in the docs.](https://circuitpython.readthedocs.io/en/latest/shared-bindings/vectorio/index.html)
 
 ### Biggest memory users #2: Fonts and Text Labels
 Fonts can also take up a lot of RAM since they are basically a collection of little bitmaps for each character glyph. If you need to display different font sizes, consider loading one smaller font file and then use the `scale` parameter in the `label` or `bitmap_label` from the display_text library. 
@@ -82,7 +81,7 @@ Reducing memory fragmentation:
 - Advanced programmers: allocate a large memory buffer early in the life of your code and reuse the same memory buffer through your program
 
 ### Other memory conserving tips:
-- Be sure all your libraries are pre-compiled as .mpy files. You can even pre-compile your code.py file to a .mpy file. *** add a link on how to do this. 
+- Be sure all your libraries are pre-compiled as .mpy files. You can even pre-compile your code.py file to a .mpy file. [Go here to learn to compile python code to .mpy files.](https://learn.adafruit.com/welcome-to-circuitpython/frequently-asked-questions#how-can-i-create-my-own-mpy-files-3020687-11)
 - Rather than keeping a big list use list generators, e.g. range() 
 
 ### Other memory-related issues:
