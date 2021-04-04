@@ -1,4 +1,5 @@
-# CircuitPython solutions to running out of Memory, especially with text and graphics
+# CircuitPython solutions to running out of Memory
+## especially text and graphics
 
 CircuitPython boards have two types of memory, non-volatile memory where programs are stored. This includes your `code.py` file and all library files. You may also have bitmaps and font files stored in non-volatile memory, sometimes called EEPROM. If you run out of non-volatile memory, you usually observe an error when trying to copy a file onto the `CIRCUITPY` drive, giving an error like “out of space, cannot save file”. 
 
@@ -32,7 +33,7 @@ Sprinkle these throughout your code to see how much RAM you have available at di
 You can monitor the memory to see which steps in your code are using up
 the memory. This is a good tool to identify where you should focus your effort for memory optimization. If you are loading a lot of fonts or bitmap files (using the Adafruit_Imageload library) you can run out of RAM in a hurry. By printing gc.mem_free() you can diagnose the biggest memory users and focus on them first. Also you may consider measuring the memory use of your imported libraries to see if they are significant, just put a gc.collect() and then print the gc.mem_free() both before and after each import statement. 
 
-### Minimize importa
+### Minimize imports
 If an import is using a lot of memory, you can selectively import only a subset of a library’s functions. 
 
 ```python
@@ -41,7 +42,7 @@ from adafruit_display_text import bitmap_label.label as Label
 
 This imports only the Label function from the adafruit_display_text library. The actual impact will depend on exactly how the library is created.  Try it out and see if you can reduce the memory used by your imports by only importing the functions you are using.
 
-### Biggest memory users: Bitmaps, Fonts and Text Labels
+### Biggest memory user #1: Bitmaps
 
 If you are using Adafruit_Imageload for displaying bitmaps, that may be a large user
 of your precious RAM. Regarding bitmaps, one memory-saving alternative to Adafruit_Imageload is to display directly from the stored file using the OnDiskBitmap functions: https://learn.adafruit.com/circuitpython-display-support-using-displayio/display-a-bitmap#ondiskbitmap-3026044-6
@@ -53,7 +54,7 @@ Try reducing your color depth by a factor of two and see how much it helps and w
 
 Get rid of bitmaps.  If your bitmaps are relatively simple shapes and lines, don’t use bitmaps, but instead use the `vectorio` functions. You can draw lines, circles and polygons and it doesn’t use much RAM at all. If at all possible, use `vectorio` shapes to conserve RAM and ditch the bitmaps. https://circuitpython.readthedocs.io/en/latest/shared-bindings/vectorio/index.html (vectorio could use a good example). 
 
-### Fonts and Text Labels
+### Biggest memory users #2: Fonts and Text Labels
 Fonts can also take up a lot of RAM since they are basically a collection of little bitmaps for each character glyph. If you need to display different font sizes, consider loading one smaller font file and then use the `scale` parameter in the `label` or `bitmap_label` from the display_text library. 
 
 If you’re going to use text labels with displayio, start with `bitmap_label`, it uses less RAM than `label`. (There are some counterintuitive situations where you may want to use `label` even though it uses more total RAM, we’ll discuss that situation later. )
