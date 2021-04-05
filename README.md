@@ -1,10 +1,10 @@
 # CircuitPython solutions to running out of Memory <br/>especially text and graphics
 
-CircuitPython boards have two types of memory, non-volatile memory where programs are stored, and volatile-RAM where your active variables ar kept. Non-volatile memory is for long-term storage of your `code.py` file and all library diles. You may also have bitmaps and font files stored in non-volatile memory, sometimes called EEPROM. If you run out of non-volatile memory, you usually observe an error when trying to copy a file onto the `CIRCUITPY` drive, giving an error like “out of space, cannot save file”. 
+CircuitPython boards have two types of memory, non-volatile memory where programs are stored, and volatile-RAM where your active variables are kept. Non-volatile memory is for long-term storage of your `code.py` file and all library files. You may also have bitmaps and font files stored in non-volatile memory, sometimes called EEPROM. If you run out of non-volatile memory, you usually observe an error when trying to copy a file onto the `CIRCUITPY` drive, giving an error like “out of space, cannot save file”. 
 
 If you can’t save a file to the CIRCUITPY drive, the solutions are to remove other unneeded files or find an alternate board that has a larger non-volatile storage.  Or, you could find a board that utilizes an SD card and can pull files from there. Here’s a learning guide on using an SD card with CircuitPython: https://learn.adafruit.com/micropython-hardware-sd-cards?view=all
 
-When running CircuitPython programs, they use volatile memory (often called RAM, random access memory) to store all your active variables.  This includes any graphics files (bitmaps and fonts) that you load into RAM for displaying onto an attached screen. Each board has a different amount of RAM so look at the product specs to see what your board has available. Some of the board’s RAM will be used by the CircuitPython system so not all will be available to you for your variables. 
+When running CircuitPython programs, they use volatile memory (often called RAM, random access memory) to store all your active variables.  This includes any graphics files (bitmaps and fonts) that you load into RAM for displaying onto an attached screen. Each board has a different amount of RAM so look at the product details to see what your board has available. Some of the board’s RAM will be used by the CircuitPython system so not all will be available to you for your variables. 
 
 ### `Memory Allocation Failed` errors
 
@@ -39,7 +39,7 @@ If an import is using a lot of memory, you can selectively import only a subset 
 from adafruit_display_text import bitmap_label.label as Label
 ```
 
-This imports only the Label function from the adafruit_display_text library. The actual impact will depend on exactly how the library is created.  Try it out and see if you can reduce the memory used by your imports by only importing the functions you are using.
+This imports only the Label function from the adafruit_display_text library. The actual impact will depend on exactly how the library is created.  Try it out and see if you can reduce the memory used by your imports by selectively importing the functions you are using.
 
 ### Biggest memory user #1: Bitmaps
 
