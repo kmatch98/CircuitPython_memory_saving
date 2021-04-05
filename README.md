@@ -1,6 +1,6 @@
 # CircuitPython solutions to running out of Memory <br/>especially text and graphics
 
-CircuitPython boards have two types of memory, non-volatile memory where programs are stored. This includes your `code.py` file and all library files. You may also have bitmaps and font files stored in non-volatile memory, sometimes called EEPROM. If you run out of non-volatile memory, you usually observe an error when trying to copy a file onto the `CIRCUITPY` drive, giving an error like “out of space, cannot save file”. 
+CircuitPython boards have two types of memory, non-volatile memory where programs are stored, and volatile-RAM where your active variables ar kept. Non-volatile memory is for long-term storage of your `code.py` file and all library diles. You may also have bitmaps and font files stored in non-volatile memory, sometimes called EEPROM. If you run out of non-volatile memory, you usually observe an error when trying to copy a file onto the `CIRCUITPY` drive, giving an error like “out of space, cannot save file”. 
 
 If you can’t save a file to the CIRCUITPY drive, the solutions are to remove other unneeded files or find an alternate board that has a larger non-volatile storage.  Or, you could find a board that utilizes an SD card and can pull files from there. Here’s a learning guide on using an SD card with CircuitPython: https://learn.adafruit.com/micropython-hardware-sd-cards?view=all
 
