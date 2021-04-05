@@ -85,7 +85,7 @@ Reducing memory fragmentation:
 - Rather than keeping a big list use list generators, e.g. range() 
 
 ### Other memory-related issues:
-- “pystack exhausted” errors - you may be doing something with a lot of of levels of fucntion calls or recursion. Maybe try another way of solving your problem. Other times the cause is unclear, ask for guidance on discord (Adafu.it/discord). 
+- “pystack exhausted” errors - you may be doing something with a lot of of levels of function calls or recursion. Maybe try another way of solving your problem. Other times the cause is unclear, ask for guidance on discord: https://adafru.it/discord
 
 ### Other resources on CircuitPython memory usage:
 
