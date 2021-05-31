@@ -81,10 +81,28 @@ Reducing memory fragmentation:
 - Advanced programmers: allocate a large memory buffer early in the life of your code and reuse the same memory buffer through your program.
 
 ### Other memory conserving tips:
-- Be sure all your libraries are pre-compiled as .mpy files. if you pull libraries from thr CircuitPython bundle, they are already pre-compiled to .mpy files. [Go here to learn to compile python code to .mpy files.](https://learn.adafruit.com/welcome-to-circuitpython/frequently-asked-questions#how-can-i-create-my-own-mpy-files-3020687-11)
-- Rather than keeping a big list use list generators, e.g. range() 
 - Try to import big modules first.
 - Take ou the library module file from the directory package and use it directly at the ``lib`` level.
+
+#### Use `.mpy` files
+Be sure all your libraries are pre-compiled as .mpy files. if you pull libraries from thr CircuitPython bundle, they are already pre-compiled to .mpy files. [Go here to learn to compile python code to .mpy files.](https://learn.adafruit.com/welcome-to-circuitpython/frequently-asked-questions#how-can-i-create-my-own-mpy-files-3020687-11)
+
+#### Comments are bad: Only joking... but they kind of are.
+Comments in circuitpython code in .py format take up memory on the device when running the code even though they don't do anything. If you need to save some memory, you could delete all your comments. However, a better solution is to leave the comments in the code and compress to a .mpy file (See above/below)
+
+But, code.py can't be compressed.
+
+Simple workaround:
+* Rename code.py to mycode.py
+* Compress mycode.py to mycode.mpy on your computer and only save/copy the .mpy file to the device. This not only compresses the python scripts but removes the comments.
+* Create a new code.py which imports your compressed code:
+```
+import mycode
+```
+This does make the development steps a little harder than just saving the code.py file to the device but in a memory-constrained device like QT PY it can be worth the effort.
+
+#### Use generators
+Rather than keeping a big list use list generators, e.g. range() 
 
 ### Other memory-related issues:
 - “pystack exhausted” errors - you may be doing something with a lot of of levels of function calls or recursion. Maybe try another way of solving your problem. Other times the cause is unclear, ask for guidance on discord: https://adafru.it/discord
@@ -97,5 +115,5 @@ Reducing memory fragmentation:
 
 - Video: Project specific - @foamyguy's livestream on saving memory on the EZbake oven for the big-screened PyPortal Titano: https://youtu.be/lDAyfZp_350
 
-- Video: Deep dive with Scott Shawcroft - into the weeds of CircuitPython memory use: https://youtu.be/baa5ILZTRkQ
+- Video: Deep dive with Scott Shawcroft - deep into the weeds of CircuitPython memory use: https://youtu.be/baa5ILZTRkQ
 
