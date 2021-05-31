@@ -83,6 +83,8 @@ Reducing memory fragmentation:
 ### Other memory conserving tips:
 - Be sure all your libraries are pre-compiled as .mpy files. if you pull libraries from thr CircuitPython bundle, they are already pre-compiled to .mpy files. [Go here to learn to compile python code to .mpy files.](https://learn.adafruit.com/welcome-to-circuitpython/frequently-asked-questions#how-can-i-create-my-own-mpy-files-3020687-11)
 - Rather than keeping a big list use list generators, e.g. range() 
+- Try to import big modules first.
+- Take ou the library module file from the directory package and use it directly at the ``lib`` level.
 
 ### Other memory-related issues:
 - “pystack exhausted” errors - you may be doing something with a lot of of levels of function calls or recursion. Maybe try another way of solving your problem. Other times the cause is unclear, ask for guidance on discord: https://adafru.it/discord
