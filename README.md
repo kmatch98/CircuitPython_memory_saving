@@ -82,7 +82,7 @@ Reducing memory fragmentation:
 
 ### Other memory conserving tips:
 - Try to import big modules first.
-- Take ou the library module file from the directory package and use it directly at the ``lib`` level.
+- Take out the library module file from the directory package and use it directly at the ``lib`` level.
 
 #### Use `.mpy` files
 Be sure all your libraries are pre-compiled as .mpy files. if you pull libraries from thr CircuitPython bundle, they are already pre-compiled to .mpy files. [Go here to learn to compile python code to .mpy files.](https://learn.adafruit.com/welcome-to-circuitpython/frequently-asked-questions#how-can-i-create-my-own-mpy-files-3020687-11)
